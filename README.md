@@ -173,6 +173,25 @@ curl -X POST http://localhost:8000/recommend \
 See [docs/architecture.md](docs/architecture.md) for the system overview and
 [docs/Deep_Architecture.md](docs/Deep_Architecture.md) for sequence diagrams
 and component interactions.
+
+```mermaid
+graph LR
+    %% Nodes
+    User((👤 Learner))
+    
+    subgraph "Local Execution"
+        App[ EduRecommender]
+        Emb[ Embeddings]
+    end
+    
+    Cloud[ LLM Router]
+
+    %% Flow
+    User -->|Profile| App
+    App -->|Vector Search| Emb
+    App -->|Re-Rank Candidates| Cloud
+    App -->|Recommendations| User
+```
  
 ```
 User Profile ──> Embed ──> Cosine Similarity ──> Top-5 ──> LLM Re-Rank ──> Top-3
