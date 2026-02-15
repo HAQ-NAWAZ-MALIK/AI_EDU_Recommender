@@ -7,7 +7,7 @@ Personalised educational content recommendation engine using **Hybrid Search**
  
 ## Live Demos
  
-The app is deployed in **two versions** — try both and compare!
+The app is deployed in **two versions** — try both !
  
 | Version | Stack | Link |
 |---------|-------|------|
@@ -15,7 +15,7 @@ The app is deployed in **two versions** — try both and compare!
 | **Streamlit Cloud** | Python + Streamlit | [edurecommender-irutxxxskykznw5xbd78bn.streamlit.app](https://edurecommender-irutxxxskykznw5xbd78bn.streamlit.app/) |
  
 > **Why two versions?** The **HuggingFace Spaces** edition is built with
-> React + Express and runs inside a Docker container — it is significantly
+> React + Express and runs inside a Docker container : it is significantly
 > **faster**, more responsive, and optimised for production use. The
 > **Streamlit** edition is a Python-native prototype  as per required on Hiring assignmnet that is not much optimzed when loading intailly
 > and carries the overhead of Streamlit's re-run model.
