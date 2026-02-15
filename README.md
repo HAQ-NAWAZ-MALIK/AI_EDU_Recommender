@@ -1,16 +1,53 @@
-# EduRecommender — Clean Code Edition
-
+# EduRecommender 
+ 
 Personalised educational content recommendation engine using **Hybrid Search**
 (embedding-based retrieval + LLM re-ranking).
 
-This is a clean-code rewrite of the original EduRecommender project, applying
-Python best practices: strict typing, enums, structured logging, modular
-architecture, and comprehensive documentation.
-
 ---
+ 
+## Live Demos
+ 
+The app is deployed in **two versions** — try both and compare!
+ 
+| Version | Stack | Link |
+|---------|-------|------|
+| **HuggingFace Spaces** (Recommended) | React + Node.js + Docker | [omarrran-edu-recommender.hf.space](https://huggingface.co/spaces/Omarrran/EDU_Recommender) |
+| **Streamlit Cloud** | Python + Streamlit | [edurecommender-irutxxxskykznw5xbd78bn.streamlit.app](https://edurecommender-irutxxxskykznw5xbd78bn.streamlit.app/) |
+ 
+> **Why two versions?** The **HuggingFace Spaces** edition is built with
+> React + Express and runs inside a Docker container — it is significantly
+> **faster**, more responsive, and optimised for production use. The
+> **Streamlit** edition is a Python-native prototype  as per required on Hiring assignmnet that is not much optimzed when loading intailly
+> and carries the overhead of Streamlit's re-run model.
+ 
+---
+ 
+## Video Demos
 
+ ### Streamlit Demo
+
+
+https://github.com/user-attachments/assets/0ef7c65a-2789-44d3-8bba-bdcef3d421b7
+
+ 
+<video src="YOUR_HF_VIDEO_URL_HERE" controls width="100%">
+  Your browser does not support the video tag.
+</video>
+ 
+ ### HuggingFace Spaces Demo
+https://github.com/user-attachments/assets/dad05a76-1260-4964-b1e1-92acf4d9a36c
+
+
+
+ 
+<video src="YOUR_STREAMLIT_VIDEO_URL_HERE" controls width="100%">
+  Your browser does not support the video tag.
+</video>
+ 
+---
+ 
 ## Features
-
+ 
 - **Hybrid Search Architecture** — fast semantic retrieval (`sentence-transformers`)
   followed by intelligent LLM re-ranking (`Kimi-K2.5` via HuggingFace Router).
 - **Strict Type Safety** — `Difficulty`, `LearningStyle`, `ContentFormat` enums
@@ -20,53 +57,60 @@ architecture, and comprehensive documentation.
 - **Embedding Cache** — sub-15 ms latency on repeated queries.
 - **Graceful Fallback** — rule-based re-ranking when no LLM API key is set.
 - **FastAPI Backend** — RESTful endpoints with OpenAPI docs.
-
+- **Streamlit Frontend** — glassmorphism dark UI with auto-mode and preset profiles.
+ 
 ---
-
+ 
 ## Quick Start
-
+ 
 ### 1. Install
-
+ 
 ```bash
 cd clean-code
 pip install -r requirements.txt
 ```
-
+ 
 ### 2. Configure
-
+ 
 Copy the example environment file and add your API key (optional):
-
+ 
 ```bash
 cp .env.example .env
 ```
-
+ 
 ```env
 # Enables LLM re-ranking (optional — rule-based fallback works without it)
 HF_TOKEN=hf_...
-
+ 
 # Embedding runs locally by default — no key needed
 EMBEDDING_PROVIDER=local
 ```
-
+ 
 ### 3. Run the API
-
+ 
 ```bash
 uvicorn api.main:app --reload --port 8000
 ```
-
+ 
 Open [http://localhost:8000/docs](http://localhost:8000/docs) for interactive
 API docs.
-
-### 4. Test
-
+ 
+### 4. Run the Streamlit Frontend
+ 
+```bash
+streamlit run streamlit_app.py
+```
+ 
+### 5. Test
+ 
 ```bash
 python -m tests.test_api
 ```
-
+ 
 ---
-
+ 
 ## Project Structure
-
+ 
 ```
 clean-code/
 ├── app/
@@ -87,25 +131,26 @@ clean-code/
 │   └── Deep_Architecture.md # Detailed component diagrams
 ├── .devcontainer/
 │   └── devcontainer.json    # Dev container config
-├── .env.example             # Environment template
+├── streamlit_app.py         # Streamlit glassmorphism frontend
+├── env.example              # Environment template
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
-
+ 
 ---
-
+ 
 ## API Endpoints
-
+ 
 | Method | Path         | Description                           |
 | ------ | ------------ | ------------------------------------- |
 | GET    | `/health`    | Liveness probe                        |
 | GET    | `/content`   | Full content catalogue                |
 | GET    | `/users`     | Mock user profiles                    |
 | POST   | `/recommend` | Top-3 personalised recommendations    |
-
+ 
 ### Example Request
-
+ 
 ```bash
 curl -X POST http://localhost:8000/recommend \
   -H "Content-Type: application/json" \
@@ -120,41 +165,37 @@ curl -X POST http://localhost:8000/recommend \
     "interest_tags": ["ml", "deployment", "kubernetes"]
   }'
 ```
-
+ 
 ---
-
+ 
 ## Architecture
-
+ 
 See [docs/architecture.md](docs/architecture.md) for the system overview and
 [docs/Deep_Architecture.md](docs/Deep_Architecture.md) for sequence diagrams
 and component interactions.
-
+ 
 ```
 User Profile ──> Embed ──> Cosine Similarity ──> Top-5 ──> LLM Re-Rank ──> Top-3
                    │                                            │
               sentence-transformers                   Kimi-K2.5 / Rules
 ```
-
+ 
 ---
-
-## Clean Code Improvements over Original
-
-| Area               | Original                    | Clean Code Edition            |
-| ------------------ | --------------------------- | ----------------------------- |
-| Type safety        | Raw strings everywhere      | Enums (`Difficulty`, etc.)    |
-| Validation         | None on Pydantic fields     | `gt=0`, `ge=1`, `le=1.0`     |
-| Logging            | `print()` statements        | `logging.getLogger(__name__)` |
-| Annotations        | Partial                     | Full `NDArray`, `list[...]`   |
-| Documentation      | Minimal docstrings          | Module + function + attribute |
-| Timing             | Repeated boilerplate        | Extracted `_timed()` helper   |
-| Dependencies       | Unused `httpx`              | Trimmed to essentials         |
-| Test structure     | Flat script                 | `tests/` package with `main()`|
-| Future annotations | Missing                     | `from __future__ import annotations` |
-
+ 
+## Deployment Comparison
+ 
+| Feature | HuggingFace Spaces | Streamlit Cloud |
+|---------|-------------------|-----------------|
+| **Stack** | React + Node.js + Docker | Python + Streamlit |
+| **Responsiveness** | Instant (SPA, no page re-runs) | Slower (full script re-run) |
+| **Cold start** | Fast (Docker pre-built) | Slower (pip install on wake) |
+| **UI framework** | Custom glassmorphism CSS | Streamlit widgets + injected CSS |
+| **LLM re-ranking** | Optional (server-side) | Optional (direct call) |
+| **Best for** | Production / portfolio | Prototyping / quick iteration |
 ---
-
+ 
 ## Configuration Reference
-
+ 
 | Variable               | Default                          | Description                      |
 | ---------------------- | -------------------------------- | -------------------------------- |
 | `HF_TOKEN`             | —                                | HuggingFace token for LLM       |
@@ -165,9 +206,9 @@ User Profile ──> Embed ──> Cosine Similarity ──> Top-5 ──> LLM R
 | `EMBEDDING_MODEL_LOCAL`| `all-MiniLM-L6-v2`              | sentence-transformers model      |
 | `EMBEDDING_MODEL_API`  | `text-embedding-ada-002`         | OpenAI-compatible model          |
 | `EMBEDDING_API_KEY`    | —                                | API key for cloud embeddings     |
-
+ 
 ---
-
+ 
 ## License
-
+ 
 MIT
