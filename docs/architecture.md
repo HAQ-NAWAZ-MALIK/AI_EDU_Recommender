@@ -1,4 +1,4 @@
-# System Architecture — EduRecommender (Clean Code Edition)
+# System Architecture — EduRecommender 
 
 ## 1. High-Level Architecture
 
