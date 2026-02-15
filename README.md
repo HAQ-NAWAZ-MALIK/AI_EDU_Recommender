@@ -3,10 +3,6 @@
 Personalised educational content recommendation engine using **Hybrid Search**
 (embedding-based retrieval + LLM re-ranking).
 
-This is a clean-code rewrite of the original EduRecommender project, applying
-Python best practices: strict typing, enums, structured logging, modular
-architecture, and comprehensive documentation.
-
 ---
 
 ## Features
