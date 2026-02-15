@@ -135,21 +135,6 @@ User Profile ──> Embed ──> Cosine Similarity ──> Top-5 ──> LLM R
               sentence-transformers                   Kimi-K2.5 / Rules
 ```
 
----
-
-## Clean Code Improvements over Original
-
-| Area               | Original                    | Clean Code Edition            |
-| ------------------ | --------------------------- | ----------------------------- |
-| Type safety        | Raw strings everywhere      | Enums (`Difficulty`, etc.)    |
-| Validation         | None on Pydantic fields     | `gt=0`, `ge=1`, `le=1.0`     |
-| Logging            | `print()` statements        | `logging.getLogger(__name__)` |
-| Annotations        | Partial                     | Full `NDArray`, `list[...]`   |
-| Documentation      | Minimal docstrings          | Module + function + attribute |
-| Timing             | Repeated boilerplate        | Extracted `_timed()` helper   |
-| Dependencies       | Unused `httpx`              | Trimmed to essentials         |
-| Test structure     | Flat script                 | `tests/` package with `main()`|
-| Future annotations | Missing                     | `from __future__ import annotations` |
 
 ---
 
