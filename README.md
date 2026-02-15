@@ -1,4 +1,4 @@
-# EduRecommender — Clean Code Edition
+# EduRecommender 
 
 Personalised educational content recommendation engine using **Hybrid Search**
 (embedding-based retrieval + LLM re-ranking).
