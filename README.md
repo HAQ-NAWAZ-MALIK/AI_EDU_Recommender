@@ -66,7 +66,7 @@ https://github.com/user-attachments/assets/dad05a76-1260-4964-b1e1-92acf4d9a36c
 ### 1. Install
  
 ```bash
-cd clean-code
+cd AI_EDU_Recommender
 pip install -r requirements.txt
 ```
  
@@ -112,7 +112,7 @@ python -m tests.test_api
 ## Project Structure
  
 ```
-clean-code/
+AI_EDU_Recommender/
 ├── app/
 │   ├── __init__.py          # Package metadata + __version__
 │   ├── config.py            # Environment loader (single source of truth)
