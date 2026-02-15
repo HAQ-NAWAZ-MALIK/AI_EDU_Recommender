@@ -1,4 +1,4 @@
-# Architecture Deep Dive — EduRecommender (Clean Code Edition)
+# Architecture Deep Dive — EduRecommender 
 
 Detailed internal structure, data flow, and component interactions.
 
