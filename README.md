@@ -1,7 +1,11 @@
-# EduRecommender 
+# EduRecommender — Clean Code Edition
 
 Personalised educational content recommendation engine using **Hybrid Search**
 (embedding-based retrieval + LLM re-ranking).
+
+This is a clean-code rewrite of the original EduRecommender project, applying
+Python best practices: strict typing, enums, structured logging, modular
+architecture, and comprehensive documentation.
 
 ---
 
@@ -24,7 +28,7 @@ Personalised educational content recommendation engine using **Hybrid Search**
 ### 1. Install
 
 ```bash
-cd AI_EDU_Recommender
+cd clean-code
 pip install -r requirements.txt
 ```
 
@@ -64,7 +68,7 @@ python -m tests.test_api
 ## Project Structure
 
 ```
-AI_EDU_Recommender/
+clean-code/
 ├── app/
 │   ├── __init__.py          # Package metadata + __version__
 │   ├── config.py            # Environment loader (single source of truth)
@@ -131,6 +135,21 @@ User Profile ──> Embed ──> Cosine Similarity ──> Top-5 ──> LLM R
               sentence-transformers                   Kimi-K2.5 / Rules
 ```
 
+---
+
+## Clean Code Improvements over Original
+
+| Area               | Original                    | Clean Code Edition            |
+| ------------------ | --------------------------- | ----------------------------- |
+| Type safety        | Raw strings everywhere      | Enums (`Difficulty`, etc.)    |
+| Validation         | None on Pydantic fields     | `gt=0`, `ge=1`, `le=1.0`     |
+| Logging            | `print()` statements        | `logging.getLogger(__name__)` |
+| Annotations        | Partial                     | Full `NDArray`, `list[...]`   |
+| Documentation      | Minimal docstrings          | Module + function + attribute |
+| Timing             | Repeated boilerplate        | Extracted `_timed()` helper   |
+| Dependencies       | Unused `httpx`              | Trimmed to essentials         |
+| Test structure     | Flat script                 | `tests/` package with `main()`|
+| Future annotations | Missing                     | `from __future__ import annotations` |
 
 ---
 
